@@ -225,21 +225,123 @@ class HomeView extends GetView<HomeController> {
                               padding: EdgeInsets.symmetric(horizontal: 25),
                               children: [
                                 SizedBox(height: 20),
-                                Text("Kategori Paket",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold
-                                ),),
+                                Text(
+                                  "Kategori Paket",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ListCategory(
+                                      icon: "web-logo",
+                                      title: "Internet",
+                                    ),
+                                    ListCategory(
+                                      icon: "phone-logo",
+                                      title: "Telpon",
+                                    ),
+                                    ListCategory(
+                                      icon: "sms-logo",
+                                      title: "SMS",
+                                    ),
+                                    ListCategory(
+                                      icon: "plane-logo",
+                                      title: "Roaming",
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ListCategory(
+                                      icon: "yt-logo",
+                                      title: "Hiburan",
+                                    ),
+                                    ListCategory(
+                                      icon: "shield-logo",
+                                      title: "Unggulan",
+                                    ),
+                                    ListCategory(
+                                      icon: "envelope-logo",
+                                      title: "Tersimpan",
+                                    ),
+                                    ListCategory(
+                                      icon: "hdd-logo",
+                                      title: "Riwayat",
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 30),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Terbaru dari Telkomsel",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "Lihat Semua",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFFEC2028)),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      ListPromo(
+                                        image: "images-1",
+                                      ),
+                                      ListPromo(
+                                        image: "images-2",
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 30),
+                                Text(
+                                  "Tanggap COVID-19",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 20),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      ListPromo(
+                                        image: "images-3",
+                                      ),
+                                      ListPromo(
+                                        image: "images-4",
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 30),
                               ],
                             ),
                           ),
                           Container(
                             height: 90,
                             decoration: BoxDecoration(
-                              border: Border(
-                                top: BorderSide(color: Color(0xFFE4E5EA))
-                              )
-                            ),
+                                border: Border(
+                                    top: BorderSide(color: Color(0xFFE4E5EA)))),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -283,6 +385,64 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
+class ListPromo extends StatelessWidget {
+  ListPromo({Key? key, required this.image}) : super(key: key);
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.only(right: 15),
+        width: Get.width * 0.7,
+        height: 115,
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Image.asset(
+          "assets/pic/$image.png",
+          fit: BoxFit.fill,
+        ));
+  }
+}
+
+class ListCategory extends StatelessWidget {
+  ListCategory({
+    Key? key,
+    required this.icon,
+    required this.title,
+  }) : super(key: key);
+  final String icon;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: 50,
+          height: 50,
+          child: Image.asset(
+            "assets/logo/$icon.png",
+            fit: BoxFit.scaleDown,
+          ),
+          decoration: ShapeDecoration(
+              color: Color.fromARGB(255, 255, 232, 234), shape: CircleBorder()),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 15,
+          ),
+        )
+      ],
+    );
+  }
+}
+
 class IconTabs extends StatelessWidget {
   const IconTabs({
     Key? key,
@@ -311,10 +471,7 @@ class IconTabs extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            color:
-            (status == true) ?
-             Color(0xFFEC2028):
-             Color(0xFF747D8C),
+            color: (status == true) ? Color(0xFFEC2028) : Color(0xFF747D8C),
             fontSize: 11,
           ),
         )
